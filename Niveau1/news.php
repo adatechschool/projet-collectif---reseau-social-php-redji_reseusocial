@@ -21,7 +21,7 @@
             <main>
                 <!-- L'article qui suit est un exemple pour la présentation et 
                   @todo: doit etre retiré -->
-                <article>
+                <!-- <article>
                     <h3>
                         <time datetime='2020-02-01 11:12:13' >31 février 2010 à 11h12</time>
                     </h3>
@@ -38,7 +38,7 @@
                         <a href="">#lorem</a>,
                         <a href="">#piscitur</a>,
                     </footer>
-                </article>               
+                </article>                -->
 
                 <?php
                 /*
@@ -113,8 +113,14 @@
                             <p><?php echo $post['content'] ?></p>
                         </div>
                         <footer>
-                            <small>♥<?php echo $post['like_number'] ?></small> 
-                            <a href=""><?php echo $post['taglist'] ?></a>,
+                            <small>♥<?php echo $post['like_number'] ?></small>                           
+                            <?php $tags = explode(',', $post['taglist']);
+                            foreach ($tags as $tag): ?>
+                            <a href="">#<?php echo $tag; ?></a>,      
+                            <?php endforeach;
+                            unset($tags);
+                             ?>
+
                         </footer>
                     </article>
                     <?php
