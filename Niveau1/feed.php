@@ -80,27 +80,30 @@
                  * Etape 4: @todo Parcourir les messsages et remplir correctement le HTML avec les bonnes valeurs php
                  * A vous de retrouver comment faire la boucle while de parcours...
                  */
-                ?>                
+                while ($message = $lesInformations->fetch_assoc())
+                {
+                    $date = date("j F Y \a\\t H:i", strtotime($message['created']));
+                    // echo "<pre>" . print_r($message, 1) . print_r($date, 1) . "</pre>";
+                    ?>                
                 <article>
                     <h3>
-                        <time datetime='2020-02-01 11:12:13' >31 février 2010 à 11h12</time>
+                        <time datetime='<?php echo $message['created']; ?>' ><?php echo $date; ?></time>
                     </h3>
-                    <address>par AreTirer</address>
+                    <address><?php echo $message['author_name']; ?></address>
                     <div>
-                        <p>Ceci est un paragraphe</p>
-                        <p>Ceci est un autre paragraphe</p>
-                        <p>... de toutes manières il faut supprimer cet 
-                            article et le remplacer par des informations en 
-                            provenance de la base de donnée</p>
+                        <p><?php echo $message['content']; ?></p>
                     </div>                                            
                     <footer>
-                        <small>♥ 132</small>
-                        <a href="">#lorem</a>,
-                        <a href="">#piscitur</a>,
+                        <small>♥ <?php echo $message['like_number']; ?></small>
+                        <?php $tags = explode(',', $message['taglist']); 
+                        foreach ($tags as $tag): ?>
+                            <a href="">#<?php echo $tag?></a>,
+                        <?php endforeach; 
+                        unset($tag); ?>
                     </footer>
                 </article>
                 <?php
-                // et de pas oublier de fermer ici vote while
+                }// et de pas oublier de fermer ici vote while
                 ?>
 
 
