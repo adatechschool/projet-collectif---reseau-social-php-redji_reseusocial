@@ -40,20 +40,10 @@
                 // Etape 4: à vous de jouer
                 //@todo: faire la boucle while de parcours des abonnés et mettre les bonnes valeurs ci dessous 
                 while ($followers = $lesInformations->fetch_assoc())
-    
                  {
                     //  echo "<pre>" . print_r($followers, 1) . "</pre>";
-                
-                ?>
-                <article>
-                    <img src="user.jpg" alt="blason"/>
-                    <h3><?php echo $followers['alias']; ?></h3>
-                    <p>id: <?php echo $followers['id']; ?></p>
-                    
-                    
-                </article>
-            <?php }?>
-            
+                    include "user.php";
+                 }?>           
             </main>
         </div>
     </body>
