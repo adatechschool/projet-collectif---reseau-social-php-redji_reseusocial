@@ -80,33 +80,11 @@
                  * Etape 4: @todo Parcourir les messsages et remplir correctement le HTML avec les bonnes valeurs php
                  * A vous de retrouver comment faire la boucle while de parcours...
                  */
-                while ($message = $lesInformations->fetch_assoc())
+                while ($post = $lesInformations->fetch_assoc())
                 {
-                    $date = date("j F Y \a\\t H:i", strtotime($message['created']));
                     // echo "<pre>" . print_r($message, 1) . print_r($date, 1) . "</pre>";
-                    ?>                
-                <article>
-                    <h3>
-                        <time datetime='<?php echo $message['created']; ?>' ><?php echo $date; ?></time>
-                    </h3>
-                    <address><?php echo $message['author_name']; ?></address>
-                    <div>
-                        <p><?php echo $message['content']; ?></p>
-                    </div>                                            
-                    <footer>
-                        <small>♥ <?php echo $message['like_number']; ?></small>
-                        <?php $tags = explode(',', $message['taglist']); 
-                        foreach ($tags as $tag): ?>
-                            <a href="">#<?php echo $tag?></a>,
-                        <?php endforeach; 
-                        unset($tag); ?>
-                    </footer>
-                </article>
-                <?php
-                }// et de pas oublier de fermer ici vote while
-                ?>
-
-
+                    include "post.php";
+                } ?>
             </main>
         </div>
     </body>

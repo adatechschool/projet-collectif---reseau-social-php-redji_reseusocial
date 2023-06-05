@@ -73,34 +73,10 @@
                  * Etape 4: @todo Parcourir les messsages et remplir correctement le HTML avec les bonnes valeurs php
                  */
                 while ($post = $lesInformations->fetch_assoc())
-                {
-
+                { 
                     //echo "<pre>" . print_r($post, 1) . "</pre>";
-                    ?>                
-                    <article>
-                        <h3> 
-                            <time><?php echo $post['created']; ?></time>
-                       </h3> 
-                        <address><?php echo $post['author_name']; ?></address>
-                        <div>
-                           
-                     
-                            <p><?php echo $post['content'] ?> </p>
-                        </div>                                            
-                        <footer>
-                            <small>♥ <?php echo $post['like_number'] ?></small>
-                            <?php $tags = explode(',', $post['taglist']);
-                            foreach ($tags as $tag): ?>
-                            <a href="">#<?php echo $tag; ?></a>,
-                    
-                            <?php endforeach;
-                            unset($tag);
-                             ?>
-                        </footer>
-                    </article>
-                <?php } ?>
-
-
+                    include "post.php";
+                } ?>    
             </main>
         </div>
     </body>
