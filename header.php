@@ -1,3 +1,15 @@
+<?php
+session_start();
+?>
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>ReSoC - Connexion</title> 
+        <meta name="author" content="Julien Falconnet">
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
 <header>
             <a href='admin.php'><img src="resoc.jpg" alt="Logo de notre réseau social"/></a>
             <nav id="menu">
