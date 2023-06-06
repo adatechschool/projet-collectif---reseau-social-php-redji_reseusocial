@@ -1,3 +1,12 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>ReSoC - Mur</title> 
+        <meta name="author" content="Julien Falconnet">
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
         <?php include 'header.php'; ?>
 
         <div id="wrapper">
@@ -9,7 +18,9 @@
              * Documentation : https://www.php.net/manual/fr/reserved.variables.get.php
              * ... mais en résumé c'est une manière de passer des informations à la page en ajoutant des choses dans l'url
              */
-            $userId =intval($_GET['user_id']);
+            // $userId =intval($_GET['user_id']);
+            $userId = isset($_GET['user_id']) ? intval($_GET['user_id']) : intval($_POST['user_id']);
+
             ?>
             <?php
             /**
@@ -17,7 +28,6 @@
              */
             $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
             ?>
-
             <aside>
                 <?php
                 /**
@@ -66,9 +76,17 @@
                  */
                 while ($post = $lesInformations->fetch_assoc())
                 { 
-                    //echo "<pre>" . print_r($post, 1) . "</pre>";
+                    echo "<pre>" . print_r($post, 1) . "</pre>";
                     include "post.php";
-                } ?>    
+                } ?>
+            
+            <form method="post" action="wall.php">
+            <textarea name="message" placeholder="Entrez votre message" cols="80" rows="5"></textarea>
+            <input type='hidden'name= 'user_id' value=<?php echo $userId ?>>
+            <input type="submit" value="Envoyer" />
+
+            </form>
+
             </main>
         </div>
     </body>
