@@ -28,7 +28,36 @@
              */
             $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
             ?>
-            <aside>
+
+            <?php 
+        if (isset($_POST['user_id'])){
+        $authorId = $_POST['user_id'];
+        $postContent = $_POST['message'];
+
+        $authorId = intval($mysqli->real_escape_string($authorId));
+        $postContent = $mysqli->real_escape_string($postContent);
+        
+        $lInstructionSql = "INSERT INTO posts "
+                . "(id, user_id, content, created, parent_id) "
+                . "VALUES (NULL, "
+                . $authorId . ", "
+                . "'" . $postContent . "', "
+                . "NOW(), "
+                . "NULL);"
+                ;
+        // echo $lInstructionSql;
+                
+            $ok = $mysqli->query($lInstructionSql);
+            if ( ! $ok)
+            {
+                echo "Impossible d'ajouter le message: " . $mysqli->error;
+            } else
+            {
+                // echo "Message posté en tant que :" . $authorId;
+            }
+        } ?>
+
+            <aside>          
                 <?php
                 /**
                  * Etape 3: récupérer le nom de l'utilisateur
@@ -45,6 +74,7 @@
                     <p>Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias']; ?>
                         (n° <?php echo $userId ?>)
                     </p>
+                    <?php include "follow.php" ?>
                 </section>
             </aside>
             <main>
@@ -76,17 +106,16 @@
                  */
                 while ($post = $lesInformations->fetch_assoc())
                 { 
-                    echo "<pre>" . print_r($post, 1) . "</pre>";
+                    // echo "<pre>" . print_r($post, 1) . "</pre>";
                     include "post.php";
                 } ?>
-            
-            <form method="post" action="wall.php">
-            <textarea name="message" placeholder="Entrez votre message" cols="80" rows="5"></textarea>
-            <input type='hidden'name= 'user_id' value=<?php echo $userId ?>>
-            <input type="submit" value="Envoyer" />
-
-            </form>
-
+                <?php if( isset($_SESSION['connected_id']) && $userId == $_SESSION['connected_id']) {?>  
+                    <form method="post" action="wall.php">
+                    <textarea name="message" placeholder="Entrez votre message" cols="80" rows="5"></textarea>
+                    <input type='hidden'name= 'user_id' value=<?php echo $userId ?>>
+                    <input type="submit" value="Envoyer" />
+                </form>
+                <?php } ?>
             </main>
         </div>
     </body>
