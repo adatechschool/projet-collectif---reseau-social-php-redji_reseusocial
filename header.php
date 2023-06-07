@@ -23,8 +23,8 @@ if (isset($_SESSION['connected_id'])) {
             <?php endif; ?>
                 <a href="tags.php?tag_id=1">Mots-clés</a>
             </nav>
-        <?php if(isset($connectedId) && $connectedId!==""): ?>
             <nav id="user">
+            <?php if(isset($connectedId) && $connectedId!=="") {?> 
                 <a href="#">▾ Profil</a>
                 <ul>
                     <li><a href="settings.php?user_id=<?php echo $connectedId; ?>">Paramètres</a></li>
@@ -32,6 +32,9 @@ if (isset($_SESSION['connected_id'])) {
                     <li><a href="subscriptions.php?user_id=<?php echo $connectedId; ?>">Mes abonnements</a></li>
                     <li><a href="logout.php">Se déconnecter</a></li>
                 </ul>
-            </nav>
-        <?php endif; ?>
+                <?php }
+                else {?> 
+                    <a href='login.php'> Login </a>
+                <?php }?>
+            </nav>              
 </header>
